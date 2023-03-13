@@ -40,15 +40,15 @@ def find_eligible_flights_with_given_budget(start, budget, flights_list):
     visited = []
     while len(visited) < len(graph):
 
-        current_node = min((node for node in graph if node not in visited), key=fares.get)
-        visited.append(current_node)
+        current_city = min((node for node in graph if node not in visited), key=fares.get)
+        visited.append(current_city)
 
-        for (neighbor, fare) in graph[current_node].items():
-            fare_to_current_node = fares[current_node]
-            total_fare_to_next_node = fare_to_current_node + fare
+        for (destination, fare) in graph[current_city].items():
+            fare_to_current_city = fares[current_city]
+            total_fare_to_next_destination = fare_to_current_city + fare
 
-            if total_fare_to_next_node < fares[neighbor]:
-                fares[neighbor] = total_fare_to_next_node
+            if total_fare_to_next_node < fares[destination]:
+                fares[destination] = total_fare_to_next_destination
     eligible_destinations = [destination for destination, fare in fares.items() if
                              fare <= budget and destination != start]
     return eligible_destinations
